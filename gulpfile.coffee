@@ -5,9 +5,11 @@ browserSync = require 'browser-sync'
 
 paths =
   appDir: './app'
+  appViewFiles: './app/views/**/*.html'
   appFiles: './app/**/*.ts'
   testFiles: './test/**/*.ts'
   distDir: './dist'
+  distViewDir: './dist/views'
   compiledApp: './.tmp/app/scripts/app.js'
   compiledAppFiles: './.tmp/app/**/*.js'
   compiledAppDir: './.tmp/app'
@@ -49,15 +51,21 @@ gulp.task 'deps', ['tsd']
 gulp.task 'html', ->
   rev = require 'gulp-rev'
   usemin = require 'gulp-usemin'
-  gulp
-    .src paths.appDir + '/index.html'
-    .pipe usemin(
-      css: [rev()]
-      vendorjs: [rev()]
-      mainjs: [rev()]
-    )
-    .pipe gulp.dest paths.distDir
-    .pipe browserSync.reload(stream: true)
+  merge = require 'merge-stream'
+  merge(
+    gulp
+      .src paths.appDir + '/index.html'
+      .pipe usemin(
+        css: [rev()]
+        vendorjs: [rev()]
+        mainjs: [rev()]
+      )
+      .pipe gulp.dest paths.distDir
+  ,
+    gulp
+      .src paths.appViewFiles
+      .pipe gulp.dest paths.distViewDir
+  ).pipe browserSync.reload(stream: true)
 
 gulp.task 'karma', (done) ->
   karma = require 'gulp-karma'
