@@ -4,6 +4,28 @@ import AppController = require('./controllers/app-controller');
 import HubotScriptService = require('./services/hubot-script-service');
 
 angular
-.module('app', [])
+.module('app', [
+  'ui.router'
+])
 .service('HubotScriptService', HubotScriptService)
-.controller('AppController', AppController);
+.controller('AppController', AppController)
+.config([
+  '$locationProvider',
+  '$stateProvider',
+  '$urlRouterProvider',
+  (
+    $locationProvider,
+    $stateProvider,
+    $urlRouterProvider
+  ) => {
+    $locationProvider.html5Mode(true);
+
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+    .state('scripts', {
+      url: '/',
+      templateUrl: 'views/scripts/list.html'
+    });
+  }
+]);
