@@ -158,6 +158,7 @@ gulp.task 'test-and-build', (done) ->
 gulp.task 'watch', ['build'], ->
   gulp.watch [
     paths.appFiles
+    paths.appViewFiles
     paths.testFiles
     paths.appDir + '/styles/*.less'
     paths.appDir + '/index.html'
