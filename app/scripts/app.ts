@@ -25,7 +25,11 @@ angular
     $stateProvider
     .state('scripts', {
       url: '/',
-      templateUrl: 'views/scripts/list.html'
+      views: {
+        'list-view': {
+          templateUrl: 'views/scripts/list.html'
+        }
+      }
     });
   }
 ]);
