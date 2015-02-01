@@ -8,18 +8,18 @@ class AppController {
     'HubotScriptService'
   ];
 
+  limit: number;
   loaded: boolean;
   query: string;
   scripts: Array<{}>;
-  limit: number;
 
   constructor(
     $scope : ng.IScope,
     HubotScriptService : HubotScriptService
   ) {
+    this.limit = 10;
     this.loaded = false;
     this.scripts = [];
-    this.limit = 10;
 
     HubotScriptService.findAll().then((scripts) => {
       this.loaded = true;
