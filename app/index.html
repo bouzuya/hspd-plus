@@ -15,6 +15,7 @@
     <h1>hspd : hubot script per day</h1>
     <div class="loader" ng-class="{loading: !c.loaded}">loading...</div>
     <div class="body" ng-class="{loaded: c.loaded}">
+      <div ui-view="detail-view"></div>
       <div ui-view="list-view"></div>
     </div>
   </div>
