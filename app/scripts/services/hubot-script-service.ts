@@ -26,6 +26,13 @@ class HubotScriptService {
       }, reject);
     });
   }
+
+  find(scriptId: number): ng.IPromise<{}> {
+    // NOTE: too slow
+    return this.findAll().then((scripts) => {
+      return scripts.filter((i) => i['number'] === scriptId)[0];
+    });
+  }
 }
 
 export = HubotScriptService;
