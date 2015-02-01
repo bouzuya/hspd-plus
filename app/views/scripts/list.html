@@ -3,7 +3,7 @@
   <input
     class="query"
     ng-model="c.query"
-    placeholder="hubot-t_wada"
+    placeholder="twada"
     type="search"
     />
   <span class="search-result">
@@ -27,11 +27,12 @@
       <div class="number-container">
         <div class="number">
           <p>
-            <a ng-href="http://blog.bouzuya.net/{{i.date | date : 'yyyy/MM/dd'}}/">
+            <a ui-sref=".detail({ scriptId: i.number })">
               <span class="number-prefix">day </span>
               <span ng-bind="i.number">N</span>
               <span class="number-suffix">.</span>
-            </a></p>
+            </a>
+          </p>
         </div>
       </div>
       <div class="repo-container">
